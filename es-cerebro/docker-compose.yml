@@ -9,5 +9,7 @@ services:
             - AUTH_TYPE=basic
             - BASIC_AUTH_USER=admin
             - BASIC_AUTH_PWD=admin
+        volumes:
+            - ./es-config/conf/application.conf:/opt/cerebro/conf/application.conf
         ports:
             - 9000:9000

@@ -1,0 +1,5 @@
+docker run \
+-v /root/es-head/usr/src/app/_site/app.js:|/usr/src/app/_site/app.js \
+-v /root/es-head/usr/src/app/_site/vendor.js:/usr/src/app/_site/vendor.js \
+-v /root/es-head/usr/src/app/Gruntfile.js:/usr/src/app/Gruntfile.js \
+-d --name es-head -p 9100:9100  mobz/elasticsearch-head:5

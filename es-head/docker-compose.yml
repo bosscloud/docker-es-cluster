@@ -1,0 +1,13 @@
+version: "3"
+services:
+    es-head0:
+        image: mobz/elasticsearch-head:5
+        container_name: es-head
+        restart: always
+        volumes:
+            - ./es-config/usr/src/app/Gruntfile.js:/usr/src/app/Gruntfile.js
+            - ./es-config/usr/src/app/_site/app.js:/usr/src/app/_site/app.js
+            - ./es-config/usr/src/app/_site/vendor.js:/usr/src/app/_site/vendor.js
+        network_mode: "host"
+        ports:
+            - 9100:9100

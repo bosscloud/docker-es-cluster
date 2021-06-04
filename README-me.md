@@ -5,12 +5,13 @@ http://10.0.0.79:9100/
 
 http://10.0.0.79:9000/
 
-cerebro 是一个开源（MIT 许可）elasticsearch Web 管理工具，使用 Scala、Play Framework、AngularJS 和 Bootstrap 构建。
-https://github.com/lmenezes/cerebro
-https://github.com/lmenezes/cerebro/tree/main/examples
 
+一次性删除docker images中name为none的镜像
+有时候由于调试代码产生很多的none的image，挨个清理会有些麻烦，于是就写了以下脚本：
 
-
+docker ps -a | grep "Exited" | awk '{print $1 }'|xargs docker stop
+docker ps -a | grep "Exited" | awk '{print $1 }'|xargs docker rm
+docker images|grep none|awk '{print $3 }'|xargs docker rmi
 
 
 
