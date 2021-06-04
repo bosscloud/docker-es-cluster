@@ -1,0 +1,13 @@
+version: '3'
+services:
+    cerebro:
+        image: lmenezes/cerebro
+        container_name: es-cerebro
+        restart: always
+        environment:
+            # Basic auth using admin/admin user
+            - AUTH_TYPE=basic
+            - BASIC_AUTH_USER=admin
+            - BASIC_AUTH_PWD=admin
+        ports:
+            - 9000:9000
