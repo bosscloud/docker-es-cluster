@@ -3,6 +3,7 @@ http://10.0.0.79:9200/_cat/nodes
 
 http://10.0.0.79:9100/
 
+http://10.0.0.79:9000/
 
 cerebro 是一个开源（MIT 许可）elasticsearch Web 管理工具，使用 Scala、Play Framework、AngularJS 和 Bootstrap 构建。
 https://github.com/lmenezes/cerebro
