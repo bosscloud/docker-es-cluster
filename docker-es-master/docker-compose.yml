@@ -15,8 +15,8 @@ services:
                 hard: 65536
         volumes:
             - ./es-config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-            - ${MASTER_DATA_DIR}:/usr/share/elasticsearch/data:rw
-            - ${MASTER_LOGS_DIR}:/usr/share/elasticsearch/logs:rw
+            - ./master-data:/usr/share/elasticsearch/data:rw
+            - ./master-logs:/usr/share/elasticsearch/logs:rw
         network_mode: "host"
         ports:
             - 9200:9200
