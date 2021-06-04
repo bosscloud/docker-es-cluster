@@ -6,8 +6,18 @@ services:
         environment: # setting container env
             - ES_JAVA_OPTS=${ES_JVM_OPTS}   # set es bootstrap jvm args
         restart: always
+        ulimits:
+            memlock:
+                soft: -1
+                hard: -1
+            nofile:
+                soft: 65536
+                hard: 65536
         volumes:
             - ./es-config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
             - ${DATA_DIR}:/usr/share/elasticsearch/data:rw
             - ${LOGS_DIR}:/usr/share/elasticsearch/logs:rw
         network_mode: "host"
+        ports:
+            - 9203:9203
+            - 9303:9303
