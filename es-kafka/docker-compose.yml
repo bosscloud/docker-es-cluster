@@ -1,0 +1,48 @@
+version: '3.1'
+services:
+  zookeeper:
+    #image: zookeeper:3.5.5
+    image: wurstmeister/zookeeper:latest
+    restart: always
+    container_name: zookeeper
+    ports:
+      - 2181:2181
+    networks:
+      - docker-kafka-network
+  kafka:
+    image: wurstmeister/kafka:latest
+    restart: always
+    container_name: kafka
+    environment:
+      - KAFKA_BROKER_ID=1
+      - KAFKA_LISTENERS=PLAINTEXT://kafka:9092
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_MESSAGE_MAX_BYTES=2000000
+    ports:
+      - 9092:9092
+    networks:
+      - docker-kafka-network
+    depends_on:
+      - zookeeper
+  kafka-manager:
+    #image: kafkamanager/kafka-manager:latest
+    image: sheepkiller/kafka-manager:latest
+    restart: always
+    container_name: kafka-manager
+    ports:
+      - 9000:9000
+    environment:
+      ZK_HOSTS: zookeeper:2181
+      APPLICATION_SECRET: letmein
+      KAFKA_MANAGER_AUTH_ENABLED: "true"
+      KAFKA_MANAGER_USERNAME: admin
+      KAFKA_MANAGER_PASSWORD: admin
+    networks:
+      - docker-kafka-network
+    depends_on:
+      - kafka
+      - zookeeper
+
+networks:
+  docker-kafka-network:
+    driver: bridge

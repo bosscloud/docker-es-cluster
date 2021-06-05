@@ -1,0 +1,23 @@
+version: "3"
+services:
+    es-data06-78:
+        image: elasticsearch:7.1.0
+        container_name: es-data06-78
+        environment: # setting container env
+            - ES_JAVA_OPTS=${ES_JVM_OPTS}   # set es bootstrap jvm args
+        restart: always
+        ulimits:
+            memlock:
+                soft: -1
+                hard: -1
+            nofile:
+                soft: 65536
+                hard: 65536
+        volumes:
+            - ./es-config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+            - ${DATA_DIR}:/usr/share/elasticsearch/data:rw
+            - ${LOGS_DIR}:/usr/share/elasticsearch/logs:rw
+        network_mode: "host"
+        ports:
+            - 9206:9206
+            - 9306:9306
