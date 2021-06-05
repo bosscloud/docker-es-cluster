@@ -90,7 +90,7 @@ module.exports = function(grunt) {
 		connect: {
 			server: {
 				options: {
-                                        hostname: '*',
+                    hostname: '*',
 					port: 9100,
 					base: '.',
 					keepalive: true

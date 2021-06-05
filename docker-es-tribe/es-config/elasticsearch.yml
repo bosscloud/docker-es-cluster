@@ -6,9 +6,9 @@ node.data: false
 node.attr.rack: r1
 bootstrap.memory_lock: true
 http.port: 9204
-network.host: 10.0.0.78
+network.host: es-tribe
 transport.tcp.port: 9304
-discovery.seed_hosts: ["10.0.0.78:9300","10.0.0.78:9302","10.0.0.78:9301","10.0.0.78:9303"]
+discovery.seed_hosts: ["es-master:9300","es-data02:9302","es-data01:9301","es-data03:9303"]
 cluster.initial_master_nodes: ["master"]
 gateway.recover_after_nodes: 2
 http.cors.enabled: true
