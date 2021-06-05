@@ -8,7 +8,7 @@ bootstrap.memory_lock: true
 http.port: 9206
 network.host: 10.0.0.78
 transport.tcp.port: 9306
-discovery.seed_hosts: ["10.0.0.79:9300","10.0.0.79:9302","10.0.0.79:9301","10.0.0.79:9304","10.0.0.80:9305","10.0.0.78:9306"]
+discovery.seed_hosts: ["10.0.0.78:9300","10.0.0.78:9302","10.0.0.78:9301","10.0.0.78:9304","10.0.0.80:9305","10.0.0.78:9306"]
 cluster.initial_master_nodes: ["master"]
 gateway.recover_after_nodes: 2
 http.cors.enabled: true
