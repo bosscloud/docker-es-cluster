@@ -1,23 +1,35 @@
 version: "3"
 services:
+    # 服务名称
     es-master:
+        # 使用的镜像 image: docker.elastic.co/elasticsearch/elasticsearch:7.1.0
         image: elasticsearch:7.1.0
+        # 容器名称
         container_name: es-master
         environment: # setting container env
+            # 设置内存，如内存不足，可以尝试调低点
             - ES_JAVA_OPTS=${ES_JVM_OPTS}   # set es bootstrap jvm args
+        # 失败自动重启策略
         restart: always
         ulimits:
+            # 栈内存的上限
             memlock:
+                # 不限制
                 soft: -1
                 hard: -1
             nofile:
                 soft: 65536
                 hard: 65536
         volumes:
+            # 将容器中es的配置文件映射到本地，本地必须提前先有该文件，设置跨域， 否则head插件无法连接该节点
             - ./es-config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-            - ./master-data:/usr/share/elasticsearch/data:rw
-            - ./master-logs:/usr/share/elasticsearch/logs:rw
+            # 存放数据的文件， 注意：这里的esdata为 顶级volumes下的一项。
+            - ${MASTER_DATA_DIR}:/usr/share/elasticsearch/data:rw
+            # 存放数据的文件， 注意：这里的esdata为 顶级volumes下的一项。
+            - ${MASTER_LOGS_DIR}:/usr/share/elasticsearch/logs:rw
         network_mode: "host"
         ports:
+            # http端口，可以直接浏览器访问
             - 9200:9200
+            # es集群之间相互访问的端口，jar之间就是通过此端口进行tcp协议通信，遵循tcp协议。
             - 9300:9300
