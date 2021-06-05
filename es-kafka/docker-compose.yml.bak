@@ -8,13 +8,13 @@ services:
     ports:
       - 2181:2181
     volumes:
-      - ./zookeeper/zk1/conf/zoo.cfg:/opt/zookeeper-3.4.13/bin/../conf/zoo.cfg
-      - ./zookeeper/zk1/data:/opt/zookeeper-3.4.13/data
-      - ./zookeeper/zk1/log:/opt/zookeeper-3.4.13/datalog
+      - /root/es-kafka/zookeeper/zk1/conf/zoo.cfg:/opt/zookeeper-3.4.13/conf/zoo.cfg
+      - /root/es-kafka/zookeeper/zookeeper/zk1/data:/opt/zookeeper-3.4.13/data
+      - /root/es-kafka/zookeeper/zookeeper/zk1/log:/opt/zookeeper-3.4.13/datalog
     environment:
       JMX_PORT: 9911
       ZOO_MY_ID: 1
-      ZOO_SERVERS: server.1=zk1:2888:3888 server.2=zk2:2888:3888 server.3=zk3:2888:3888
+      ZOO_SERVERS: server.1=0.0.0.0:2888:3888 server.2=zk2:2888:3888 server.3=zk3:2888:3888
     networks:
       default:
         ipv4_address: 172.16.0.2
@@ -27,9 +27,9 @@ services:
     ports:
       - 2182:2181
     volumes:
-      - ./zookeeper/zk2/conf/zoo.cfg:/opt/zookeeper-3.4.13/bin/../conf/zoo.cfg
-      - ./zookeeper/zk2/data:/opt/zookeeper-3.4.13/data
-      - ./zookeeper/zk2/log:/opt/zookeeper-3.4.13/datalog
+      - /root/es-kafka/zookeeper/zk2/conf/zoo.cfg:/opt/zookeeper-3.4.13/conf/zoo.cfg
+      - /root/es-kafka/zookeeper/zookeeper/zk2/data:/opt/zookeeper-3.4.13/data
+      - /root/es-kafka/zookeeper/zookeeper/zk2/log:/opt/zookeeper-3.4.13/datalog
     environment:
       JMX_PORT: 9922
       ZOO_MY_ID: 2
@@ -46,9 +46,9 @@ services:
     ports:
       - 2183:2181
     volumes:
-      - ./zookeeper/zk3/conf/zoo.cfg:/opt/zookeeper-3.4.13/bin/../conf/zoo.cfg
-      - ./zookeeper/zk3/data:/opt/zookeeper-3.4.13/data
-      - ./zookeeper/zk3/log:/opt/zookeeper-3.4.13/datalog
+      - /root/es-kafka/zookeeper/zk3/conf/zoo.cfg:/opt/zookeeper-3.4.13/conf/zoo.cfg
+      - /root/es-kafka/zookeeper/zookeeper/zk3/data:/opt/zookeeper-3.4.13/data
+      - /root/es-kafka/zookeeper/zookeeper/zk3/log:/opt/zookeeper-3.4.13/datalog
     environment:
       JMX_PORT: 9933
       ZOO_MY_ID: 3
@@ -56,6 +56,7 @@ services:
     networks:
       default:
         ipv4_address: 172.16.0.4
+
 
 
   kafka1:
