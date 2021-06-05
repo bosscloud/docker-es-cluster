@@ -8,10 +8,11 @@ services:
     ports:
       - 2181:2181
     volumes:
-      - ./zookeeper/zk1/conf/zoo.cfg:/opt/zookeeper-3.4.13/conf/zoo.cfg
+      #- ./zookeeper/zk1/conf/zoo.cfg:/opt/zookeeper-3.4.13/conf/zoo.cfg
       - ./zookeeper/zk1/data:/opt/zookeeper-3.4.13/data
       - ./zookeeper/zk1/log:/opt/zookeeper-3.4.13/datalog
     environment:
+      JMX_PORT: 9911
       ZOO_MY_ID: 1
       ZOO_SERVERS: server.1=zk1:2888:3888 server.2=zk2:2888:3888 server.3=zk3:2888:3888
     networks:
@@ -26,10 +27,11 @@ services:
     ports:
       - 2182:2181
     volumes:
-      - ./zookeeper/zk2/conf/zoo.cfg:/opt/zookeeper-3.4.13/conf/zoo.cfg
+      #- ./zookeeper/zk2/conf/zoo.cfg:/opt/zookeeper-3.4.13/conf/zoo.cfg
       - ./zookeeper/zk2/data:/opt/zookeeper-3.4.13/data
       - ./zookeeper/zk2/log:/opt/zookeeper-3.4.13/datalog
     environment:
+      JMX_PORT: 9922
       ZOO_MY_ID: 2
       ZOO_SERVERS: server.1=zk1:2888:3888 server.2=zk2:2888:3888 server.3=zk3:2888:3888
     networks:
@@ -44,15 +46,17 @@ services:
     ports:
       - 2183:2181
     volumes:
-      - ./zookeeper/zk3/conf/zoo.cfg:/opt/zookeeper-3.4.13/conf/zoo.cfg
+      #- ./zookeeper/zk3/conf/zoo.cfg:/opt/zookeeper-3.4.13/conf/zoo.cfg
       - ./zookeeper/zk3/data:/opt/zookeeper-3.4.13/data
       - ./zookeeper/zk3/log:/opt/zookeeper-3.4.13/datalog
     environment:
+      JMX_PORT: 9933
       ZOO_MY_ID: 3
       ZOO_SERVERS: server.1=zk1:2888:3888 server.2=zk2:2888:3888 server.3=zk3:2888:3888
     networks:
       default:
         ipv4_address: 172.16.0.4
+
 
   kafka1:
     image: wurstmeister/kafka
@@ -63,15 +67,16 @@ services:
       - 9092:9092
     environment:
       KAFKA_HOST_NAME: kafka1
-      KAFKA_ADVERTISED_HOST_NAME: kafka1
+      KAFKA_ADVERTISED_HOST_NAME: 10.0.0.80
       KAFKA_ADVERTISED_PORT: 9092
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://10.0.0.80:9092
       KAFKA_ZOOKEEPER_CONNECT: zk1:2181,zk2:2181,zk3:2181
       KAFKA_BROKER_ID: 0
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      JMX_PORT: 9999
     volumes:
       - /etc/localtime:/etc/localtime
-      - ./kafka/kafka1/log:/kafka
+      - ./kafka/kafka1/log:/kafka/kafka-logs-kafka1
     links:
       - zk1
       - zk2
@@ -89,15 +94,16 @@ services:
       - 9093:9092
     environment:
       KAFKA_HOST_NAME: kafka2
-      KAFKA_ADVERTISED_HOST_NAME: kafka2
+      KAFKA_ADVERTISED_HOST_NAME: 10.0.0.80
       KAFKA_ADVERTISED_PORT: 9093
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://10.0.0.80:9093
       KAFKA_ZOOKEEPER_CONNECT: zk1:2181,zk2:2181,zk3:2181
       KAFKA_BROKER_ID: 1
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      JMX_PORT: 9988
     volumes:
       - /etc/localtime:/etc/localtime
-      - ./kafka/kafka2/log:/kafka
+      - ./kafka/kafka2/log:/kafka/kafka-logs-kafka2
     links:
       - zk1
       - zk2
@@ -115,15 +121,16 @@ services:
       - 9094:9092
     environment:
       KAFKA_HOST_NAME: kafka3
-      KAFKA_ADVERTISED_HOST_NAME: kafka3
+      KAFKA_ADVERTISED_HOST_NAME: 10.0.0.80
       KAFKA_ADVERTISED_PORT: 9094
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://10.0.0.80:9094
       KAFKA_ZOOKEEPER_CONNECT: zk1:2181,zk2:2181,zk3:2181
       KAFKA_BROKER_ID: 2
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      JMX_PORT: 9977
     volumes:
       - /etc/localtime:/etc/localtime
-      - ./kafka/kafka3/log:/kafka
+      - ./kafka/kafka3/log:/kafka/kafka-logs-kafka3
     links:
       - zk1
       - zk2
