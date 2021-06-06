@@ -1,0 +1,8 @@
+
+
+解决java.nio.file.AccessDeniedException: /usr/share/elasticsearch/data/nodes......
+
+看错误我们会以为是es容器里的/usr/share/elasticsearch/data/nodes文件夹目录没有读写权限，其实给提示误导了，实际是挂载的目录没有读写权限。比如我们宿主主机的配置目录为:/usr/local/es/data，那么我们需要赋予它读写权限：
+
+chmod 777 /usr/local/es/data
+重新启动，问题不再存在。

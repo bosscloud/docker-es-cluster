@@ -59,7 +59,10 @@ DefaultLimitMEMLOCK=infinity
 10.0.0.78  es-data01
 10.0.0.78  es-data02
 10.0.0.78  es-data03
+10.0.0.78  es-data04
 10.0.0.78  es-kafka
+
+
 
 172.16.0.2 zk1
 172.16.0.3 zk2

@@ -1,0 +1,6 @@
+
+
+
+Caused by: org.elasticsearch.cluster.coordination.CoordinationStateRejectedException: join validatio
+原因：推测是因为该节点之前启动过ES，已经创建了data文件夹，与要加入的集群冲突。
+解决：删除data文件夹
