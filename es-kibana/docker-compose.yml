@@ -1,0 +1,14 @@
+version: "3"
+services:
+    es-kibana:
+        image: docker.elastic.co/kibana/kibana:7.1.0
+        container_name: es-kibana
+        environment:
+            - ELASTICSEARCH_URL=http://10.0.0.78:9200
+        restart: always
+        #volumes:
+        #    - ./config/kibana.yml:/usr/share/kibana/config/kibana.yml
+        network_mode: "host"
+        ports:
+            - 5601:5601
+
