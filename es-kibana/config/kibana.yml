@@ -7,3 +7,9 @@ server.name: kibana
 server.host: "0"
 elasticsearch.hosts: [ "http://elasticsearch:9200" ]
 xpack.monitoring.ui.container.elasticsearch.enabled: true
+
+#elastalert server info
+#elastalert-kibana-plugin.serverHost: 172.18.47.63
+#elastalert-kibana-plugin.serverPort: 3030
+
+## systemctl restart kibana

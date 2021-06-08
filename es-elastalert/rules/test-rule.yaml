@@ -1,0 +1,30 @@
+es_host: 10.216.6.76
+
+es_port: 9200
+
+#es_username: tfmaq
+#es_username: tfmaq
+name: Example frequency rule 2
+
+type: frequency
+
+index: hihi-test
+
+num_events: 5
+
+timeframe:
+  hours: 4
+
+filter:
+  - query:
+    query_string:
+      query: "type:access" # 查询规则根据日志，自行配置
+      #query: "message:error"  #
+
+
+alert:
+  - "email"
+
+email:
+  - "zhangzhifei@360.cn"
+

@@ -1,0 +1,13 @@
+
+docker run -d -p 3030:3030 \
+    -v `pwd`/config/elastalert.yaml:/opt/elastalert/config.yaml \
+    -v `pwd`/config/elastalert-test.yaml:/opt/elastalert/config-test.yaml \
+    -v `pwd`/config/config.json:/opt/elastalert-server/config/config.json \
+    -v `pwd`/rule_templates:/opt/elastalert/rule_templates \
+    --net="host" \
+    --name elastalert bitsensor/elastalert:latest
+
+
+    # -v `pwd`/rules:/opt/elastalert/rules \
+wget https://github.com/bitsensor/elastalert-kibana-plugin/releases/download/1.0.2/elastalert-kibana-plugin-1.0.2-6.6.2.zip
+ /usr/share/kibana/bin/kibana-plugin  list
