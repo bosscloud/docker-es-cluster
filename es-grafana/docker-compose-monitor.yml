@@ -7,7 +7,7 @@ networks:
 services:
   prometheus:
     image: prom/prometheus
-    container_name: es-prometheus
+    container_name: monitor-prometheus
     hostname: prometheus
     restart: always
     volumes:
@@ -20,7 +20,7 @@ services:
 
   alertmanager:
     image: prom/alertmanager
-    container_name: es-alertmanager
+    container_name: monitor-alertmanager
     hostname: alertmanager
     restart: always
     volumes:
@@ -32,7 +32,7 @@ services:
 
   grafana:
     image: grafana/grafana
-    container_name: es-grafana
+    container_name: monitor-grafana
     hostname: grafana
     restart: always
     ports:
@@ -42,7 +42,7 @@ services:
 
   node-exporter:
     image: quay.io/prometheus/node-exporter
-    container_name: es-node-exporter
+    container_name: monitor-node-exporter
     hostname: node-exporter
     restart: always
     ports:
@@ -52,7 +52,7 @@ services:
 
   cadvisor:
     image: google/cadvisor:latest
-    container_name: es-cadvisor
+    container_name: monitor-cadvisor
     hostname: cadvisor
     restart: always
     volumes:
