@@ -1,0 +1,20 @@
+docker更直观portainer
+LINUX安装Docker及Portainer可视化界面
+https://blog.csdn.net/u011984312/article/details/85119188
+
+
+$ sudo docker search portainer
+$ sudo docker pull portainer/portainer
+$ sudo docker volume create portainer_data
+$ sudo docker run -d -p 9000:9000 \
+            --name portainer \
+            --restart always \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            -v portainer_data:/data \
+            portainer/portainer
+
+浏览器访问设置
+访问主机9000端口(9000为启动时配置端口)
+
+docker pull portainer/portainer
+docker run -d -p 9001:9000 --restart=always -v /var/run/docker.sock:/var/run/docker.sock --name prtainer-test portainer/portainer
