@@ -1,0 +1,27 @@
+
+
+
+
+# docker pull IP.139:2234/strongjdk:1.1
+Error response from daemon: Get https://192.168.118.139:2234/v2/: http: server gave HTTP response to HTTPS client
+# vi /usr/lib/systemd/system/docker.service
+
+ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --insecure-registry IP.139:2234
+
+# systemctl daemon-reload
+# systemctl restart docker
+
+docker pull IP.139:2234/strongjdk:1.1
+docker tag IP.139:2234/strongjdk:1.1  strongjdk:1.1
+
+docker run --restart=always -d -p 8001:8080 -e SPRING_PROFILES_ACTIVE=dev --name api-gateway-logs api-gateway-logs:latest
+
+
+    - curl -O http://IP.139:6100/ec-form/server/Dockerfile
+    - mv result target
+    - target_name=`ls target | grep .jar$`
+    - mkdir config
+    - echo "server.port=8080" > config/application.properties
+    - echo "#!/bin/sh" > start.sh
+    - sed -i '$ajava -Xms1024m -Xmx1024m -Xmn256m -Dserver.port=8080 -jar /app/target/'"$target_name"  start.sh
+    - docker build ./ -t api-gateway-logs:latest
